@@ -1,10 +1,8 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class CowCollege {
@@ -24,7 +22,7 @@ public class CowCollege {
             // do nothing
         }
 
-        int[] tuitionPerCow = new int[numCows];
+        long[] tuitionPerCow = new long[numCows];
         String[] stringTuitionPerCow = stringMaxTuitionPerCow.split(" ");
         for (int i = 0; i < numCows; i++) {
             tuitionPerCow[i] = Integer.parseInt(stringTuitionPerCow[i]);
@@ -35,12 +33,12 @@ public class CowCollege {
 
         // key: store how much each cow can pay | value: the number of cows that can pay
         // that in hashmap
-        HashMap<Integer, Integer> tuitionMap = new HashMap<Integer, Integer>();
+        HashMap<Long, Long> tuitionMap = new HashMap<Long, Long>();
 
         // print array
         for (int i = 0; i < numCows; i++) {
-            int oneCowPay = tuitionPerCow[i];
-            int totalAmount = 0;
+            long oneCowPay = tuitionPerCow[i];
+            long totalAmount = (long) 0;
             // how many cows can pay this particular tuition
             for (int j = 0; j < numCows; j++) {
                 if (oneCowPay <= tuitionPerCow[j]) {
@@ -59,14 +57,14 @@ public class CowCollege {
          * }
          */
 
-        Map<Integer, Integer> sortedTuitionMap = tuitionMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+        Map<Long, Long> sortedTuitionMap = tuitionMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (oldValue, newValue) -> oldValue, HashMap::new));
         
         // find the key of the first occurence of the max value
-        int maxTuition = 0;
-        int maxTuitionKey = 0;
-        for (int key : sortedTuitionMap.keySet()) {
+        long maxTuition = 0;
+        long maxTuitionKey = 0;
+        for (long key : sortedTuitionMap.keySet()) {
             if (sortedTuitionMap.get(key) > maxTuition) {
                 maxTuition = sortedTuitionMap.get(key);
                 maxTuitionKey = key;
