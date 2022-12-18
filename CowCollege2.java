@@ -1,56 +1,33 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.math.BigInteger;
+import java.util.Scanner;
 
 public class CowCollege2 {
     public static void main(String[] args) {
-        // get input from user using BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int numCows = 0;
-        String stringMaxTuitionPerCow = null;
-        try {
-            numCows = Integer.parseInt(br.readLine());
+        // get input from user using Scanner
+        Scanner scanner = new Scanner(System.in);
+        int numCows = scanner.nextInt();
 
-            // get next line
-            stringMaxTuitionPerCow = br.readLine();
-        } catch (Exception e) {
-            // do nothing
+        BigInteger[] tuitionPerCow = new BigInteger[numCows];
+        for (int i = 0; i < numCows; i++) {
+            tuitionPerCow[i] = scanner.nextBigInteger();
         }
 
-        long[] tuitionPerCow = new long[numCows];
-        String[] stringTuitionPerCow = stringMaxTuitionPerCow.split(" ");
+        BigInteger maxTotalAmount = BigInteger.ZERO;
+        BigInteger leastOnePerCow = BigInteger.ZERO;
         for (int i = 0; i < numCows; i++) {
-            tuitionPerCow[i] = Integer.parseInt(stringTuitionPerCow[i]);
-        }
-
-        // sort array
-        Arrays.sort(tuitionPerCow);
-
-        // key: store how much each cow can pay | value: the number of cows that can pay
-        // that in hashmap
-        HashMap<Long, Long> tuitionMap = new HashMap<Long, Long>();
-        long leastOnePerCow = 0;
-        long maxTotalAmount = 0;
-
-        // print array
-        for (int i = 0; i < numCows; i++) {
-            long oneCowPay = tuitionPerCow[i];
-            long totalAmount = (long) 0;
+            BigInteger oneCowPay = tuitionPerCow[i];
+            BigInteger totalAmount = BigInteger.ZERO;
             // how many cows can pay this particular tuition
             for (int j = 0; j < numCows; j++) {
-                if (oneCowPay <= tuitionPerCow[j]) {
-                    totalAmount += oneCowPay;
+                if (oneCowPay.compareTo(tuitionPerCow[j]) <= 0) {
+                    totalAmount = totalAmount.add(oneCowPay);
                 }
             }
 
-            // add to hashmap
-            tuitionMap.put(oneCowPay, totalAmount);
-            if (totalAmount > maxTotalAmount) {
+            if (totalAmount.compareTo(maxTotalAmount) > 0) {
                 maxTotalAmount = totalAmount;
                 leastOnePerCow = oneCowPay;
-            } else if (totalAmount == maxTotalAmount) {
-                if (oneCowPay < leastOnePerCow) {
+            } else if (totalAmount.compareTo(maxTotalAmount) == 0) {
                     leastOnePerCow = oneCowPay;
                 }
             }
