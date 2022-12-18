@@ -27,9 +27,6 @@ public class CowCollege {
         // sort array
         Arrays.sort(tuitionPerCow);
 
-        // key: store how much each cow can pay | value: the number of cows that can pay
-        // that in hashmap
-        HashMap<Long, Long> tuitionMap = new HashMap<Long, Long>();
         long leastOnePerCow = 0;
         long maxTotalAmount = 0;
 
@@ -44,8 +41,6 @@ public class CowCollege {
                 }
             }
 
-            // add to hashmap
-            tuitionMap.put(oneCowPay, totalAmount);
             if (totalAmount > maxTotalAmount) {
                 maxTotalAmount = totalAmount;
                 leastOnePerCow = oneCowPay;
