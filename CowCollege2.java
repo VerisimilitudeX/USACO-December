@@ -28,6 +28,7 @@ public class CowCollege2 {
                 maxTotalAmount = totalAmount;
                 leastOnePerCow = oneCowPay;
             } else if (totalAmount.compareTo(maxTotalAmount) == 0) {
+                if (oneCowPay.compareTo(leastOnePerCow) < 0) {
                     leastOnePerCow = oneCowPay;
                 }
             }
