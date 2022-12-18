@@ -30,10 +30,10 @@ public class CowCollege {
         long leastOnePerCow = 0;
         long maxTotalAmount = 0;
 
-        // print array
+        // for each cow, find out how many cows can pay this tuition
         for (int i = 0; i < numCows; i++) {
             long oneCowPay = tuitionPerCow[i];
-            long totalAmount = (long) 0;
+            long totalAmount = 0;
             // how many cows can pay this particular tuition
             for (int j = 0; j < numCows; j++) {
                 if (oneCowPay <= tuitionPerCow[j]) {
@@ -44,10 +44,8 @@ public class CowCollege {
             if (totalAmount > maxTotalAmount) {
                 maxTotalAmount = totalAmount;
                 leastOnePerCow = oneCowPay;
-            } else if (totalAmount == maxTotalAmount) {
-                if (oneCowPay < leastOnePerCow) {
-                    leastOnePerCow = oneCowPay;
-                }
+            } else if (totalAmount == maxTotalAmount && oneCowPay < leastOnePerCow) {
+                leastOnePerCow = oneCowPay;
             }
         }
 
