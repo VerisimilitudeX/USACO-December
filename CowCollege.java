@@ -1,21 +1,12 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class CowCollege {
     public static void main(String[] args) {
-        // get input from user using BufferedReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int numCows = 0;
-        String stringMaxTuitionPerCow = null;
-        try {
-            numCows = Integer.parseInt(br.readLine());
-
-            // get next line
-            stringMaxTuitionPerCow = br.readLine();
-        } catch (Exception e) {
-            // do nothing
-        }
-
+        Scanner sc = new Scanner(System.in);
+        int numCows = Integer.parseInt(sc.nextLine());
+        String stringMaxTuitionPerCow = sc.nextLine();
+        sc.close();
+        
         long[] tuitionPerCow = new long[numCows];
         String[] stringTuitionPerCow = stringMaxTuitionPerCow.split(" ");
         for (int i = 0; i < numCows; i++) {
